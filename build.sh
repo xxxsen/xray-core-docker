@@ -1,6 +1,6 @@
 #!/bin/bash
 
-VERSION=v1.5.0
+#VERSION=v1.5.0
 VERSION=$1
 
 docker buildx create --use --name mybuild
