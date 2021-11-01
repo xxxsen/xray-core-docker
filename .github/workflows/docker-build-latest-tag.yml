@@ -33,4 +33,4 @@ jobs:
           platforms: linux/amd64,linux/arm64,linux/ppc64le,linux/386,linux/arm/v7,linux/arm/v6
           tags: |
             ${{ secrets.DOCKER_HUB_USERNAME }}/xray-core:${{ steps.get_latest_tag.outputs.LATEST_TAG_NAME }}
-            ${{ secrets.DOCKER_HUB_USERNAME }}/latest
+            ${{ secrets.DOCKER_HUB_USERNAME }}/xray-core:latest
