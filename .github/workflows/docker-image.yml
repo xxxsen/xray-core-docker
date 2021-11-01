@@ -26,7 +26,7 @@ jobs:
         with:
           context: ./
           file: ./Dockerfile
-          build-args: |
-            version: master
+          build-args: version=master
           push: true
+          platforms: linux/amd64,linux/arm64,linux/ppc64le,linux/386,linux/arm/v7,linux/arm/v6
           tags: ${{ secrets.DOCKER_HUB_USERNAME }}/xray-core:latest
