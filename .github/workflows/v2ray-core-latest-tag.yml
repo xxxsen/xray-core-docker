@@ -3,9 +3,6 @@ name: v2ray-core-build-latest-tag
 on:
   schedule:
     - cron: '0 5 * * *' 
-  push:
-    branches:
-      - master  
 
 jobs:
   build:
