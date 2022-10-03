@@ -1,4 +1,4 @@
-FROM golang:1.17-buster
+FROM golang:1.18-buster
 
 ARG version=v1.5.0
 
