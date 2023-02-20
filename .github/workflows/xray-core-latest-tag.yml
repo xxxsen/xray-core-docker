@@ -21,9 +21,9 @@ jobs:
         uses: docker/setup-buildx-action@v1
       - name: Get current tag 
         id: vars
-	run: |
-	  echo "tag=${GITHUB_REF#refs/*/}" >> $GITHUB_OUTPUT
-	  echo "current tag:${GITHUB_REF#refs/*/}"
+        run: echo "tag=${GITHUB_REF#refs/*/}" >> $GITHUB_OUTPUT
+      - name: Test get tag
+        run: echo "current tag:${GITHUB_REF#refs/*/}"
       - name: Build and push
         id: docker_build
         uses: docker/build-push-action@v2
