@@ -30,7 +30,7 @@ jobs:
         with:
           context: ./
           file: ./Dockerfile
-          build-args: version=${{ steps.vars.outputs.tag }}
+          build-args: VERSION=${{ steps.vars.outputs.tag }}
           push: true
           platforms: linux/amd64,linux/arm64,linux/ppc64le,linux/386,linux/arm/v7,linux/arm/v6
           tags: |
