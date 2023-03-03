@@ -1,4 +1,4 @@
-name: xray-core-build-by-tag
+name: build-master
 
 on:
   schedule:
