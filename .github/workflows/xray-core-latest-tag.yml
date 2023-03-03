@@ -3,7 +3,7 @@ name: xray-core-build-by-tag
 on:
   push:
     tags:
-      - '*'
+      - 'v*'
 
 jobs:
   build:
