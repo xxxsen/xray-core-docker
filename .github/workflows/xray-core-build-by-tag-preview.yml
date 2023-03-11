@@ -3,7 +3,7 @@ name: xray-core-build-by-tag-preview
 on:
   push:
     tags:
-      - 'v**-preview'
+      - 'v*-preview'
 
 jobs:
   build:
@@ -23,7 +23,7 @@ jobs:
         id: vars
         run: echo "tag=$(echo ${GITHUB_REF#refs/*/}|awk -F "-" '{print $1}')" >> $GITHUB_OUTPUT
       - name: Test get tag
-        run: echo "current tag:${steps.vars.outputs.tag}"
+        run: echo "current tag:${{ steps.vars.outputs.tag }}"
       - name: Build and push
         id: docker_build
         uses: docker/build-push-action@v2
@@ -34,4 +34,4 @@ jobs:
           push: true
           platforms: linux/amd64,linux/arm64,linux/ppc64le,linux/386,linux/arm/v7,linux/arm/v6
           tags: |
-            ${{ secrets.DOCKER_HUB_USERNAME }}/xray-core:${{ steps.vars.outputs.tag }}
+            ${{ secrets.DOCKER_HUB_USERNAME }}/xray-core:${{ steps.vars.outputs.tag }}-preview
