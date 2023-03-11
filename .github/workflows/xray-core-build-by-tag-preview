@@ -1,0 +1,37 @@
+name: xray-core-build-by-tag-preview
+
+on:
+  push:
+    tags:
+      - 'v**-preview'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:    
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Login to Docker Hub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKER_HUB_USERNAME }}
+          password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+      - name: Set up Docker Buildx
+        id: buildx
+        uses: docker/setup-buildx-action@v1
+      - name: Get current tag 
+        id: vars
+        run: echo "tag=$(echo ${GITHUB_REF#refs/*/}|awk -F "-" '{print $1}')" >> $GITHUB_OUTPUT
+      - name: Test get tag
+        run: echo "current tag:${steps.vars.outputs.tag}"
+      - name: Build and push
+        id: docker_build
+        uses: docker/build-push-action@v2
+        with:
+          context: ./
+          file: ./Dockerfile
+          build-args: VERSION=${{ steps.vars.outputs.tag }}
+          push: true
+          platforms: linux/amd64,linux/arm64,linux/ppc64le,linux/386,linux/arm/v7,linux/arm/v6
+          tags: |
+            ${{ secrets.DOCKER_HUB_USERNAME }}/xray-core:${{ steps.vars.outputs.tag }}
