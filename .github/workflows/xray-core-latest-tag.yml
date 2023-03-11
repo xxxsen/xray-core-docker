@@ -22,18 +22,18 @@ jobs:
         uses: docker/setup-buildx-action@v1
       - name: Get current tag 
         id: vars
-        run: echo "tag=${GITHUB_REF#refs/*/}" >> $GITHUB_OUTPUT
+        run: echo "tag=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
       - name: Test get tag
-        run: echo "current tag:${GITHUB_REF#refs/*/}"
+        run: echo "current tag:${{ env.tag }}"
       - name: Build and push
         id: docker_build
         uses: docker/build-push-action@v2
         with:
           context: ./
           file: ./Dockerfile
-          build-args: VERSION=${{ steps.vars.outputs.tag }}
+          build-args: VERSION=${{ env.tag }}
           push: true
           platforms: linux/amd64,linux/arm64,linux/ppc64le,linux/386,linux/arm/v7,linux/arm/v6
           tags: |
-            ${{ secrets.DOCKER_HUB_USERNAME }}/xray-core:${{ steps.vars.outputs.tag }}
+            ${{ secrets.DOCKER_HUB_USERNAME }}/xray-core:${{ env.tag }}
             ${{ secrets.DOCKER_HUB_USERNAME }}/xray-core:latest
