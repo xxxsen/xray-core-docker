@@ -31,7 +31,7 @@ jobs:
           file: ./Dockerfile
           build-args: VERSION=main
           push: true
-          platforms: linux/amd64,linux/arm64,linux/ppc64le,linux/386,linux/arm/v7,linux/arm/v6
+          platforms: linux/amd64,linux/arm64
           tags: |
             ${{ secrets.DOCKER_HUB_USERNAME }}/xray-core:nightly-${{ steps.date.outputs.date }}
             ${{ secrets.DOCKER_HUB_USERNAME }}/xray-core:nightly
